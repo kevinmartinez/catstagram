@@ -26,3 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 
 eslint --ignore-path .gitignore src/registerServiceWorker.js
+
+# Ignore notes-to-self
+notes.txt
