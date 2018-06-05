@@ -56,10 +56,8 @@ class AddCat extends Component {
       imageRef: this.commentRef.current.value,
     }
     writeUserData('WhiteCat', this.commentRef.current.value)
-    // this.props.addFish(fish)
     // Refresh form
     console.log(cat)
-    // event.currentTarget.reset()
   }
 
   render() {

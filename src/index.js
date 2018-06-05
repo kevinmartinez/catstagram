@@ -13,7 +13,3 @@ ReactDOM.render(
   document.getElementById('root')
 )
 registerServiceWorker()
-
-// Set up redux Provider & connect
-// ReactDOM.render(<Router />, document.getElementById('root'))
-// registerServiceWorker()

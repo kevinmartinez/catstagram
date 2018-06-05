@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 // import { createLike } from '../actions/likes'
@@ -14,12 +15,6 @@ const Container = styled.div`
 `
 
 class App extends Component {
-  // handleChange = e => {
-  //   e.preventDefault()
-  //   const item = e.target.querySelector('input').value
-  //   this.props.likes(item)
-  // }
-
   render() {
     return (
       <Container>
@@ -50,6 +45,12 @@ function mapDispatchToProps(dispatch) {
     increment: () => dispatch({ type: 'INCREMENT' }),
     decrement: () => dispatch({ type: 'DECREMENT' }),
   }
+}
+
+App.propTypes = {
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
 }
 
 export default connect(

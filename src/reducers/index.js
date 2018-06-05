@@ -11,12 +11,3 @@ const likeCounter = (state = 0, action) => {
 }
 
 export default likeCounter
-
-// export default (state = [], action) => {
-//   switch (action.type) {
-//     case 'CREATE_LIKE':
-//       return state.concat([action.like])
-//     default:
-//       return state
-//   }
-// }
