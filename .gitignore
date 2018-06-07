@@ -13,6 +13,7 @@
 src/img
 
 src/base.js
+src/features/image
 
 # misc
 .DS_Store

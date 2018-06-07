@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-// import { createLike } from '../actions/likes'
+import like from '../features/like'
 import Header from './Header'
 import Likes from '../containers/Likes'
-// import Image from './Image'
-import AddCat from './AddCat'
 
 const Container = styled.div`
   display: grid;
@@ -33,17 +31,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    count: state,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    increment: () => dispatch({ type: 'INCREMENT' }),
-    decrement: () => dispatch({ type: 'DECREMENT' }),
-  }
-}
+const mapStateToProps = state => ({
+  count: like.selectors.getCounter(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+  increment: () => dispatch(like.actions.incrementCounter()),
+  decrement: () => dispatch(like.actions.decrementCounter()),
+})
 
 App.propTypes = {
   increment: PropTypes.func.isRequired,
