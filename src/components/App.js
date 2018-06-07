@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 // import { createLike } from '../actions/likes'
 import Header from './Header'
+import Likes from '../containers/Likes'
 // import Image from './Image'
 import AddCat from './AddCat'
 
@@ -16,15 +17,12 @@ const Container = styled.div`
 
 class App extends Component {
   render() {
+    const { count, increment, decrement } = this.props
+
     return (
       <Container>
         <Header />
-        {/* Set up and test the like state */}
-        <section>
-          <p>{this.props.count}</p>
-          <button onClick={this.props.increment}>+</button>
-          <button onClick={this.props.decrement}>-</button>
-        </section>
+        <Likes count={count} increment={increment} decrement={decrement} />
         {/* <AddCat /> */}
         {/* <section>
           <header>Scroll through cats</header>
