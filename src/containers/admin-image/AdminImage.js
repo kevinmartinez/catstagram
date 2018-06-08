@@ -4,23 +4,16 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import FileUploader from 'react-firebase-file-uploader'
-import base from '../base'
+// import Name from './Name'
+import base from '../../base'
+import AddImage from './AddImage'
 
 const UploadedImage = styled.img`
   width: 100%;
   max-width: 300px;
 `
 
-function writeUserData(userId, comment) {
-  firebase
-    .database()
-    .ref(`users/${userId}`)
-    .set({
-      comment,
-    })
-}
-
-class AddCat extends Component {
+class AdminImage extends Component {
   state = {
     username: '',
     image: '',
@@ -28,8 +21,6 @@ class AddCat extends Component {
     progress: 0,
     avatarURL: '',
   }
-
-  commentRef = React.createRef()
 
   handleChangeUsername = event => this.setState({ username: event.target.value })
   handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
@@ -48,26 +39,16 @@ class AddCat extends Component {
       .then(url => this.setState({ avatarURL: url }, console.log(url)))
   }
 
-  createCat = event => {
-    event.preventDefault()
-    console.log(event)
-
-    const cat = {
-      imageRef: this.commentRef.current.value,
-    }
-    writeUserData('WhiteCat', this.commentRef.current.value)
-    // Refresh form
-    console.log(cat)
-  }
-
   render() {
+    const { setName, name } = this.props
     return (
       <section>
-        <form>
+        <div>
           <h3>Upload your image</h3>
           <label htmlFor="image">Image:</label>
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
           {this.state.avatarURL && <UploadedImage src={this.state.avatarURL} />}
+
           <FileUploader
             accept="image/*"
             name="image"
@@ -79,12 +60,11 @@ class AddCat extends Component {
             onProgress={this.handleProgress}
           />
           <p>Add some text</p>
-          <textarea ref={this.commentRef} name="comment" cols="30" rows="10" />
-          <button onClick={this.createCat}>Clicketh me</button>
-        </form>
+          <AddImage addImage={this.props.addImage} />
+        </div>
       </section>
     )
   }
 }
 
-export default AddCat
+export default AdminImage
