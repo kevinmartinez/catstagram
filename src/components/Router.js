@@ -9,7 +9,9 @@ const Router = () => (
     {/* Switch tries different routes */}
     <Switch>
       <Route exact path="/" component={Login} />
-      <Route path="/feed/:userId" component={App} />
+      {/* <Route path="/feed/:userId" component={App} /> */}
+      {/* Testing firebase redirect */}
+      <Route path="/feed/" component={App} />
       {/* 404 default */}
       <Route component={PageNotFound} />
     </Switch>
