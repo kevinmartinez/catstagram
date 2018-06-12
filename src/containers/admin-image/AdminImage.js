@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import firebase from 'firebase'
-import { firebaseApp } from '../../base'
+import base, { firebaseApp } from '../../base'
 
 import 'firebase/auth'
 import 'firebase/firestore'
 import FileUploader from 'react-firebase-file-uploader'
 
 import AddImage from './AddImage'
-import { base } from '../../base'
-
-const storage = firebase.storage()
 
 console.log(firebaseApp)
 const UploadedImage = styled.img`

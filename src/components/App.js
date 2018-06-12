@@ -1,45 +1,17 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// React core.
-import React from 'react'
-import ReactDOM from 'react-dom'
-// import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+// Firebase.
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import base, { firebaseApp, auth } from '../base'
 import like from '../features/like'
 import Header from './Header'
 import Likes from '../containers/Likes'
 import AdminImage from '../containers/admin-image/AdminImage'
-// Firebase.
-import firebase from 'firebase/app'
-
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import { firebaseApp, authProp, auth, base } from '../base'
-import 'firebase/auth'
 import Feed from './Feed'
-// Styles
-// import styles from './app.css' // This uses CSS modules.
-// import './firebaseui-styling.global.css' // Import globally.
-
-// Get the Firebase config from the auto generated file.
-// const firebaseConfig = require('./firebase-config.json').result
-
-// Instantiate a Firebase app.
 
 const Container = styled.div`
   display: grid;
@@ -48,21 +20,7 @@ const Container = styled.div`
   margin: 0 auto;
 `
 
-/**
- * The Splash Page containing the login UI.
- */
-
-class App extends React.Component {
-  uiConfig = {
-    signInFlow: 'popup',
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      signInSuccessWithAuthResult: () => false,
-    },
-  }
+class App extends Component {
   // State can be declared in a constructor
   // Or as a property
   state = {
@@ -76,7 +34,6 @@ class App extends React.Component {
   componentDidMount() {
     // Destruct meh
     const { params } = this.props.match
-
     // For re-base
     // Sync with name from match userId param
     // this.ref = base.syncState(`${this.props.match.params.userId}`)
@@ -94,6 +51,18 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unregisterAuthObserver()
   }
+
+  uiConfig = {
+    signInFlow: 'popup',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      signInSuccessWithAuthResult: () => false,
+    },
+  }
+
   addImage = image => {
     // In react when updating state, we need to
     // 1. take a copy of the existing state
@@ -113,11 +82,8 @@ class App extends React.Component {
   render() {
     const { count, increment, decrement, image } = this.props
     return (
-      <div>
-        <div>
-          <i>photo</i> My App
-        </div>
-        <div>This is a cool demo app</div>
+      <Container>
+        <h1>Catstagram</h1>
         {this.state.isSignedIn !== undefined &&
           !this.state.isSignedIn && (
             <div>
@@ -125,21 +91,19 @@ class App extends React.Component {
             </div>
           )}
         {this.state.isSignedIn && (
-          <Container>
+          <Fragment>
+            <div>
+              <h1>My App</h1>
+              <p>Welcome {firebaseApp.auth().currentUser.displayName}! You are now signed-in!</p>
+              <button onClick={() => firebaseApp.auth().signOut()}>Sign-out</button>
+            </div>
+            <Header />
+            <Feed />
+            <Likes count={count} increment={increment} decrement={decrement} />
             <AdminImage images={this.state.images} addImage={this.addImage} />
-          </Container>
-          // <Container>
-          //   <div>
-          //     <h1>My App</h1>
-          //     <p>Welcome {firebaseApp.auth().currentUser.displayName}! You are now signed-in!</p>
-          //     <a onClick={() => firebaseApp.auth().signOut()}>Sign-out</a>
-          //   </div>
-          //   <Header />
-          //   <Likes count={count} increment={increment} decrement={decrement} />
-          //   <AdminImage images={this.state.images} addImage={this.addImage} />
-          // </Container>
+          </Fragment>
         )}
-      </div>
+      </Container>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { firebaseApp } from '../base'
 import styled from 'styled-components'
+import { firebaseApp } from '../base'
 
 const Image = styled.img`
   /* This renders the buttons above... Edit me! */
