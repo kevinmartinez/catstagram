@@ -1,17 +1,17 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Login from './Login'
+import SignInScreen from './SignInScreen'
 import App from './App'
+import HomePage from './HomePage'
 import PageNotFound from './PageNotFound'
+import { isAuthenticated } from '../base'
 
 const Router = () => (
   <BrowserRouter>
     {/* Switch tries different routes */}
     <Switch>
-      <Route exact path="/" component={Login} />
-      {/* <Route path="/feed/:userId" component={App} /> */}
-      {/* Testing firebase redirect */}
-      <Route path="/feed/" component={App} />
+      <Route exactly pattern="/" component={App} />
+      {/* <Route path="/feed/" component={App} /> */}
       {/* 404 default */}
       <Route component={PageNotFound} />
     </Switch>

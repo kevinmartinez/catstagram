@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
+import { firebaseApp } from '../../base'
+
 import 'firebase/auth'
 import 'firebase/firestore'
 import FileUploader from 'react-firebase-file-uploader'
-// import Name from './Name'
-import base from '../../base'
-import AddImage from './AddImage'
 
+import AddImage from './AddImage'
+import { base } from '../../base'
+
+const storage = firebase.storage()
+
+console.log(firebaseApp)
 const UploadedImage = styled.img`
   width: 100%;
   max-width: 300px;
@@ -25,13 +30,15 @@ class AdminImage extends Component {
   handleChangeUsername = event => this.setState({ username: event.target.value })
   handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
   handleProgress = progress => this.setState({ progress })
+  handleImageName = name => this.setState({})
   handleUploadError = error => {
     this.setState({ isUploading: false })
     console.error(error)
   }
   handleUploadSuccess = filename => {
     this.setState({ image: filename, progress: 100, isUploading: false })
-    firebase
+    console.log(this.state.image)
+    firebaseApp
       .storage()
       .ref('images')
       .child(filename)
@@ -53,7 +60,7 @@ class AdminImage extends Component {
             accept="image/*"
             name="image"
             randomizeFilename
-            storageRef={firebase.storage().ref('images')}
+            storageRef={firebaseApp.storage().ref('images')}
             onUploadStart={this.handleUploadStart}
             onUploadError={this.handleUploadError}
             onUploadSuccess={this.handleUploadSuccess}
