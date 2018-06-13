@@ -1,10 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import SignInScreen from './SignInScreen'
-import App from './App'
-import HomePage from './HomePage'
+import App from '../App'
 import PageNotFound from './PageNotFound'
-import { isAuthenticated } from '../base'
 
 const Router = () => (
   <BrowserRouter>

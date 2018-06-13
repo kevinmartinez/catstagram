@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import firebase from 'firebase'
-import base, { firebaseApp } from '../../base'
-
-import 'firebase/auth'
-import 'firebase/firestore'
+import { firebaseApp } from '../base'
 import FileUploader from 'react-firebase-file-uploader'
 
 import AddImage from './AddImage'
