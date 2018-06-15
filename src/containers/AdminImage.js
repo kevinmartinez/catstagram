@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { firebaseApp } from '../base'
 import FileUploader from 'react-firebase-file-uploader'
 
 import AddImage from './AddImage'
 
 console.log(firebaseApp)
-const UploadedImage = styled.img`
-  width: 100%;
-  max-width: 300px;
-`
 
 class AdminImage extends Component {
   state = {
@@ -40,14 +35,14 @@ class AdminImage extends Component {
   }
 
   render() {
-    const { setName, name } = this.props
+    // const { setName, name } = this.props
     return (
       <section>
         <div>
           <h3>Upload your image</h3>
           <label htmlFor="image">Image:</label>
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-          {this.state.avatarURL && <UploadedImage src={this.state.avatarURL} />}
+          {this.state.avatarURL && <img src={this.state.avatarURL} />}
 
           <FileUploader
             accept="image/*"
