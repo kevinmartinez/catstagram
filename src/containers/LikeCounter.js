@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import like from '../features/like'
 
 const LikeCounter = ({ count, increment, decrement }) => (
-  <div>
-    <p>{count}</p>
+  <Fragment>
+    <div>{count}</div>
     <button onClick={increment}>+</button>
     <button onClick={decrement}>-</button>
-  </div>
+  </Fragment>
 )
+
+const mapStateToProps = state => ({
+  count: like.selectors.getCounter(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+  increment: () => dispatch(like.actions.incrementCounter()),
+  decrement: () => dispatch(like.actions.decrementCounter()),
+})
 
 LikeCounter.propTypes = {
   increment: PropTypes.func.isRequired,
@@ -15,4 +26,7 @@ LikeCounter.propTypes = {
   count: PropTypes.number.isRequired,
 }
 
-export default LikeCounter
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LikeCounter)

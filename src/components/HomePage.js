@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Menu from './Menu'
 
 const MainHeader = styled.header`
   display: flex;
@@ -14,7 +13,6 @@ const Title = styled.h1`
 const HomePage = () => (
   <MainHeader>
     <Title>Catstagram</Title>
-    <Menu />
   </MainHeader>
 )
 

@@ -27,7 +27,7 @@ class AddImage extends Component {
         <input name="name" ref={this.nameRef} type="text" placeholder="Name" />
         <textarea name="desc" ref={this.commentRef} />
         <input name="image" ref={this.imageRef} type="text" placeholder="Image" />
-        <button type="submit">Add Fish</button>
+        <button type="submit">Add Image</button>
       </form>
     )
   }

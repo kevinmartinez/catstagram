@@ -1,53 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import like from '../features/like'
-import GetFeed from '../containers/GetFeed'
+import SiteHeader from './SiteHeader'
+import Image from './Image'
 import AdminImage from '../containers/AdminImage'
-import LikeCounter from '../containers/LikeCounter'
 
-const Main = styled.main`
-  img {
-    display: inline-block;
-    border-radius: 3px;
-    padding: 0.5rem 0;
-    margin: 0.5rem 1rem;
-    max-width: 300px;
-    background: transparent;
-    color: white;
-    border-bottom: 20px solid white;
-  }
+const FeedSection = styled.section`
+  width: 960px;
+  max-width: 90%;
+  margin: 0 auto;
 `
 class FeedView extends React.Component {
   render() {
-    const { count, increment, decrement } = this.props
     return (
-      <Main>
-        <GetFeed />
-        <LikeCounter count={count} increment={increment} decrement={decrement} />
+      <Fragment>
+        <FeedSection>
+          <SiteHeader />
+          {/* If looking show Image(s), If want to upload, show addImage (or what it is named) */}
+          <Image />
+        </FeedSection>
         <AdminImage />
-      </Main>
+      </Fragment>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  count: like.selectors.getCounter(state),
-})
-
-const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(like.actions.incrementCounter()),
-  decrement: () => dispatch(like.actions.decrementCounter()),
-})
-
-FeedView.propTypes = {
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedView)
+export default FeedView

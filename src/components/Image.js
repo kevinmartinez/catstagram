@@ -1,17 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
-import cat1 from '../img/cat1.jpg'
+import GetFeed from '../containers/GetFeed'
+import LikeCounter from '../containers/LikeCounter'
 
 const ImageContainer = styled.article`
-  width: 100%;
-  max-width: 600px;
+  background: var(--purple);
+  max-width: 90%;
   margin: 0 auto;
   text-align: center;
+  img {
+    max-width: 100%;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer {
+    display: flex;
+    justify-content: flex-end;
+  }
 `
 
-const CatImage = styled.img`
-  width: 100%;
-  max-width: 400px;
+const Like = styled.div`
+  padding: 5px;
+  background: var(--green);
 `
 
 const Image = () => (
@@ -22,9 +35,11 @@ const Image = () => (
       </h3>
       <span>Date: 2025-01-01</span>
     </header>
-    <CatImage src={cat1} alt="" />
+    <GetFeed />
     <footer>
-      <span>Likes</span>
+      <Like>
+        <LikeCounter />
+      </Like>
     </footer>
   </ImageContainer>
 )

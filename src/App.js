@@ -6,14 +6,13 @@ import { auth } from './base'
 import './global-styles'
 import FeedView from './components/FeedView'
 import SignInScreen from './containers/SignInScreen'
-import Header from './components/Header'
 
-const Container = styled.div`
-  display: grid;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-`
+// const Container = styled.div`
+//   display: grid;
+//   width: 100%;
+//   max-width: 960px;
+//   margin: 0 auto;
+// `
 
 class App extends Component {
   // State can be declared in a constructor
@@ -66,15 +65,10 @@ class App extends Component {
   render() {
     // const { count, increment, decrement } = this.props
     return (
-      <Container>
+      <Fragment>
         {this.state.isSignedIn !== undefined && !this.state.isSignedIn && <SignInScreen />}
-        {this.state.isSignedIn && (
-          <Fragment>
-            <Header />
-            <FeedView />
-          </Fragment>
-        )}
-      </Container>
+        {this.state.isSignedIn && <FeedView />}
+      </Fragment>
     )
   }
 }
