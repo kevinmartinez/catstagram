@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { firebaseApp } from '../base'
+import Img from '../components/Img'
 
 class GetFeed extends Component {
   state = {}
@@ -20,7 +21,7 @@ class GetFeed extends Component {
     console.log('From GetFeed: ', this.state)
   }
   render() {
-    return <img src={this.state.img} alt="cats are superstars" />
+    return <Img src={this.state.img} alt="cats are superstars" />
   }
 }
 

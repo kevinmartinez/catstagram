@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 // Firebase.
 import { auth } from './base'
@@ -6,7 +7,9 @@ import { auth } from './base'
 import './global-styles'
 import FeedView from './components/FeedView'
 import SignInScreen from './containers/SignInScreen'
-
+import PageNotFound from './components/PageNotFound'
+import ImageGrid from './components/ImageGrid'
+import SingleImage from './components/SingleImage'
 // const Container = styled.div`
 //   display: grid;
 //   width: 100%;
@@ -63,11 +66,24 @@ class App extends Component {
   //   console.log('Adding Image')
   // }
   render() {
-    // const { count, increment, decrement } = this.props
+    const props = this.props
     return (
       <Fragment>
         {this.state.isSignedIn !== undefined && !this.state.isSignedIn && <SignInScreen />}
-        {this.state.isSignedIn && <FeedView />}
+        {this.state.isSignedIn && (
+          /* Route components are rendered if the path prop matches the current URL */
+          <Switch>
+            <Route exact path="/" component={ImageGrid} />
+            <Route
+              path={`${props.match.url}view/:postId`}
+              render={({ match }) => <SingleImage {...props} match={match} />}
+            />
+            <Route component={PageNotFound} />
+          </Switch>
+        )
+        //  <Route path="/category" component={Category}/>
+        //  <Route path="/products" component={Products}/>
+        }
       </Fragment>
     )
   }

@@ -18,7 +18,7 @@ class SignInScreen extends React.Component {
     signInFlow: 'popup',
     signInOptions: [googleProvider.providerId, emailProvider.providerId],
     callbacks: {
-      signInSuccessWithAuthResult: () => false,
+      signInSuccessWithAuthResult: () => true,
     },
   }
   render() {

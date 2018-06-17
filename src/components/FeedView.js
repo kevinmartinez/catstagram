@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import SiteHeader from './SiteHeader'
-import Image from './Image'
 import AdminImage from '../containers/AdminImage'
+import ImageGrid from './ImageGrid'
 
 const FeedSection = styled.section`
   width: 960px;
@@ -14,11 +14,11 @@ class FeedView extends React.Component {
     return (
       <Fragment>
         <FeedSection>
-          <SiteHeader />
+          {/* <SiteHeader /> */}
           {/* If looking show Image(s), If want to upload, show addImage (or what it is named) */}
-          <Image />
+          <ImageGrid />
         </FeedSection>
-        <AdminImage />
+        {/* <AdminImage /> */}
       </Fragment>
     )
   }

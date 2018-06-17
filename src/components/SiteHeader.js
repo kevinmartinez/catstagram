@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import SignedIn from '../containers/SignedIn'
 
@@ -20,7 +21,9 @@ const Title = styled.h1`
 
 const SiteHeader = () => (
   <MainHeader>
-    <Title>Catstagram</Title>
+    <Title>
+      <Link to="/"> Catstagram </Link>
+    </Title>
     <SignedIn />
   </MainHeader>
 )

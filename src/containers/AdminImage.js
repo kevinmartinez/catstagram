@@ -3,6 +3,7 @@ import base, { firebaseApp } from '../base'
 import FileUploader from 'react-firebase-file-uploader'
 
 import AddImage from './AddImage'
+import Img from '../components/Img'
 
 console.log(firebaseApp)
 
@@ -101,7 +102,7 @@ class AdminImage extends Component {
           <h3>Upload your image</h3>
           <label htmlFor="image">Image:</label>
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-          {this.state.avatarURL && <img src={this.state.avatarURL} />}
+          {this.state.avatarURL && <Img src={this.state.avatarURL} />}
 
           <FileUploader
             accept="image/*"
